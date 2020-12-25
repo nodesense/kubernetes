@@ -73,9 +73,50 @@ http://localhost:8081/
 ----
 
 
+## Create a Postgres cluster
+
+
+microk8s kubectl create -f manifests/minimal-postgres-manifest.yaml
+
+Check here
+
+http://localhost:8081/#/list
+
+
+# check the deployed cluster
+microk8s kubectl get postgresql
+
+# check created database pods
+microk8s kubectl get pods -l application=spilo -L spilo-role
+
+# check created service resources
+microk8s  kubectl get svc -l application=spilo -L spilo-role
+
+
+# Connect to postgresql 
+
+export HOST_PORT=$(minikube service acid-minimal-cluster --url | sed 's,.*/,,')
+export PGHOST=$(echo $HOST_PORT | cut -d: -f 1)
+export PGPORT=$(echo $HOST_PORT | cut -d: -f 2)
+
+
+microk8s kubectl describe service/acid-minimal-cluster 
+
+Endpoints:         10.1.69.89:5432
+
+export PGHOST=10.1.69.89
+export PGPORT=5432
+
+
+microk8s kubectl get secret postgres.acid-minimal-cluster.credentials -o 'jsonpath={.data.password}' | base64 -d
 
 
 
+export PGPASSWORD=$(microk8s kubectl get secret postgres.acid-minimal-cluster.credentials -o 'jsonpath={.data.password}' | base64 -d)
+export PGSSLMODE=require
+psql -U postgres
+
+--------
 
 
 
