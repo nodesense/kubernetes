@@ -15,6 +15,25 @@ microk8s kubectl get all --all-namespaces
 
 microk8s dashboard-proxy
 
+
+the above command displays token, copy the token  and use it for login with below url 
+
+
+https://127.0.0.1:10443
+
+
+if chrome has exception,
+
+```
+chrome://flags/#allow-insecure-localhost in the address bar.
+
+Enable the option that says "Allow invalid certificates for resources loaded from localhost".
+
+Restart Chrome, and it should allow the site.
+```
+
+
+
 ### Start and Stop
 
 microk8s start 
