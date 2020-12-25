@@ -1,3 +1,14 @@
+sudo snap remove microk8s 
+
+sudo snap install microk8s
+
+
+snap enable microk8s
+
+microk8s reset --destroy-storage
+
+
+
 
 
 https://microk8s.io/docs/addon-dashboard
