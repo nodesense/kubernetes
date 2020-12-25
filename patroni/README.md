@@ -29,6 +29,56 @@ microk8s kubectl delete -f manifests/postgres-operator.yaml
 ```
 
 
+## Check if postgres-opearator running
+
+# if you've created the operator using yaml manifests
+
+microk8s kubectl get pod -l name=postgres-operator
+
+# if you've created the operator using helm chart
+
+microk8s kubectl get pod -l app.kubernetes.io/name=postgres-operator
+
+
+microk8s kubectl logs "$(kubectl get pod -l name=postgres-operator --output='name')"
+
+
+## Deploy Operator UI
+
+## not working
+microk8s kubectl apply -f ui/manifests/
+
+## seems working
+
+microk8s kubectl apply -k github.com/zalando/postgres-operator/ui/manifests
+
+
+# check UI pod running
+
+# if you've created the operator using yaml manifests
+
+microk8s kubectl get pod -l name=postgres-operator-ui
+ 
+
+# Port Forward
+
+ microk8s kubectl port-forward svc/postgres-operator-ui 8081:80
+
+# check if running there
+
+
+http://localhost:8081/
+
+
+----
+
+
+
+
+
+
+
+
 create file movies-db.yaml
 
 nano movies-db.yaml
