@@ -8,7 +8,7 @@ snap enable microk8s
 microk8s reset --destroy-storage
 
 
-
+## Dashboard
 
 
 https://microk8s.io/docs/addon-dashboard
