@@ -3,14 +3,24 @@
 
 Referencing from https://juan-medina.com/2019/12/12/postgresql-k8s/
 
+https://postgres-operator.readthedocs.io/en/latest/quickstart/
+
+
 ```
 git clone git@github.com:zalando/postgres-operator.git
 
 cd postgres-operator
 
+ # configuration
+ 
 sudo microk8s kubectl create -f  manifests/configmap.yaml
+
 sudo microk8s kubectl create -f manifests/operator-service-account-rbac.yaml
 sudo microk8s kubectl create -f manifests/postgres-operator.yaml 
+# operator API to be used by UI
+microk8s kubectl create -f manifests/api-service.yaml
+
+ 
 
 microk8s kubectl delete manifests/configmap.yaml
 microk8s kubectl delete -f manifests/operator-service-account-rbac.yaml
